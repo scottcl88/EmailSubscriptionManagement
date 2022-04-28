@@ -1,5 +1,7 @@
 # EmailSubscriptionManagement
 
+A simple PHP application for displaying and managing emails, intended to manage subscrptions to a service; such as marketing emails.
+
 ## Technology
 - PHP v8.1.4
 - CodeIgnitor 4
