@@ -8,12 +8,16 @@ class EmailModel extends Model
 {
     protected $table = 'emails';
 
-    public function getEmails($email = false)
+    protected $primaryKey  = 'email_id';
+
+    protected $allowedFields = ['email'];
+
+    public function getEmails($email_id = false)
     {
-        if ($email === false) {
+        if ($email_id === false) {
             return $this->findAll();
         }
 
-        return $this->where(['email' => $email])->first();
+        return $this->where(['email_id' => $email_id])->first();
     }
 }

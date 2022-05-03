@@ -17,7 +17,7 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Home');
+$routes->setDefaultController('EmailsController');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -31,7 +31,13 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
+$routes->get('/', 'EmailsController::index');
+$routes->match(['get', 'post'], 'emails/create', 'EmailsController::create');
+$routes->match(['get', 'post'], 'emails/edit/(:num)', 'EmailsController::edit/$1');
+// $routes->get('emails/edit/(:num)', 'EmailsController::edit/$1');
+$routes->get('emails/(:segment)', 'EmailsController::view/$1');
+$routes->get('emails', 'EmailsController::index');
+$routes->get('(:any)', 'EmailsController::view/$1');
 
 /*
  * --------------------------------------------------------------------
