@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 class EmailsController extends BaseController
 {
+    const CONTENT_PAGE = "templates/content";
     public function index()
     {
         $model = model(EmailModel::class);
@@ -12,7 +13,7 @@ class EmailsController extends BaseController
             'emails'  => $model->getEmails(),
             'page_name' => "emails/overview"
         ];
-        echo view('templates/content', $data);
+        echo view(self::CONTENT_PAGE, $data);
     }
     public function view($email = null)
     {
@@ -33,7 +34,7 @@ class EmailsController extends BaseController
         } else {
             $data['page_name'] = "emails/create";
         }
-        echo view('templates/content', $data);
+        echo view(self::CONTENT_PAGE, $data);
     }
     public function edit($seg1 = false)
     {
@@ -51,6 +52,16 @@ class EmailsController extends BaseController
             $data['email'] = $model->getEmails($seg1);
             $data['page_name'] = "emails/edit";
         }
-        echo view('templates/content', $data);
+        echo view(self::CONTENT_PAGE, $data);
+    }
+    public function delete($seg1 = false)
+    {
+        $model = model(EmailModel::class);
+        
+        $model->delete([
+            'email_id' => $this->request->getPost('email_id')
+        ]);
+        $data['page_name'] = "emails/success";
+        echo view(self::CONTENT_PAGE, $data);
     }
 }

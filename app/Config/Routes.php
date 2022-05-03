@@ -34,6 +34,7 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'EmailsController::index');
 $routes->match(['get', 'post'], 'emails/create', 'EmailsController::create');
 $routes->match(['get', 'post'], 'emails/edit/(:num)', 'EmailsController::edit/$1');
+$routes->match(['get', 'post'], 'emails/delete/(:num)', 'EmailsController::delete/$1');
 // $routes->get('emails/edit/(:num)', 'EmailsController::edit/$1');
 $routes->get('emails/(:segment)', 'EmailsController::view/$1');
 $routes->get('emails', 'EmailsController::index');
